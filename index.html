@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Luxcel Events – Where Every Moment Becomes a Memory</title>
+<link href="https://fonts.cdnfonts.com/css/claxone" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+  :root {
+    --burgundy-deep: #3D1119;
+    --burgundy-mid: #51181F;
+    --silver-light: #BABEC1;
+    --silver-soft: #D4D6D8;
+    --silver-pale: #E8E8E8;
+    --white: #ffffff;
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --font-display: 'Claxone', 'Cormorant Garamond', serif;
+    --font-body: 'Jost', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: #1a1a1a;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 5%;
+    background: rgba(255,255,255,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--silver-pale);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 24px rgba(61,17,25,0.08); }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    color: var(--burgundy-deep);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--burgundy-deep);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    background: var(--burgundy-deep);
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 2px;
+    transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--white); }
+  .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .hamburger span { display: block; width: 24px; height: 2px; background: var(--burgundy-deep); transition: 0.3s; }
+  .mobile-menu { display: none; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: var(--white);
+    display: flex; align-items: center;
+    padding: 120px 5% 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg-decor {
+    position: absolute; top: 0; right: 0;
+    width: 52%; height: 100%;
+    background: linear-gradient(135deg, var(--silver-pale) 0%, var(--silver-soft) 100%);
+    clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+    z-index: 0;
+  }
+  .hero-bg-decor::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80') center/cover;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    max-width: 580px;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-left: 2px solid var(--gold);
+    padding-left: 12px;
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    line-height: 1.05;
+    color: var(--burgundy-deep);
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero p {
+    font-size: 1.05rem;
+    color: #555;
+    line-height: 1.75;
+    margin-bottom: 40px;
+    max-width: 460px;
+    font-weight: 300;
+  }
+  .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--burgundy-deep);
+    color: var(--white);
+    padding: 15px 34px;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none; cursor: pointer;
+    text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: background 0.25s, transform 0.2s;
+    border-radius: 2px;
+  }
+  .btn-primary:hover { background: var(--burgundy-mid); transform: translateY(-2px); }
+  .btn-outline {
+    background: transparent;
+    color: var(--burgundy-deep);
+    padding: 14px 32px;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1.5px solid var(--burgundy-deep);
+    cursor: pointer; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 10px;
+    transition: all 0.25s;
+    border-radius: 2px;
+  }
+  .btn-outline:hover { background: var(--burgundy-deep); color: var(--white); }
+  .hero-stats {
+    margin-top: 60px;
+    display: flex; gap: 40px;
+  }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    color: var(--burgundy-deep);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    margin-top: 4px;
+    font-weight: 400;
+  }
+
+  /* ─── SECTION SHARED ─── */
+  section { padding: 100px 5%; }
+  .section-tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 16px;
+  }
+  .section-tag::before { content: ''; width: 32px; height: 1px; background: var(--gold); }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    color: var(--burgundy-deep);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-sub {
+    font-size: 1rem;
+    color: #666;
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 520px;
+  }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--white); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2px;
+    margin-top: 60px;
+    border: 2px solid var(--silver-pale);
+  }
+  .service-card {
+    padding: 48px 36px;
+    border: 1px solid var(--silver-pale);
+    transition: all 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; bottom: 0; left: 0;
+    width: 100%; height: 0;
+    background: var(--burgundy-deep);
+    transition: height 0.4s cubic-bezier(0.4,0,0.2,1);
+    z-index: 0;
+  }
+  .service-card:hover::before { height: 100%; }
+  .service-card:hover .service-icon,
+  .service-card:hover .service-name,
+  .service-card:hover .service-desc { color: var(--white); }
+  .service-card:hover .service-icon { background: rgba(255,255,255,0.1); }
+  .service-icon, .service-name, .service-desc { position: relative; z-index: 1; transition: color 0.3s; }
+  .service-icon {
+    width: 56px; height: 56px;
+    background: var(--silver-pale);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    color: var(--burgundy-deep);
+    margin-bottom: 24px;
+    transition: all 0.3s;
+  }
+  .service-name {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    color: var(--burgundy-deep);
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+  .service-desc {
+    font-size: 0.88rem;
+    color: #777;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ─── PACKAGES ─── */
+  #packages { background: var(--silver-pale); }
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    margin-top: 60px;
+  }
+  .package-card {
+    background: var(--white);
+    padding: 48px 36px;
+    border-radius: 4px;
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1.5px solid transparent;
+  }
+  .package-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(61,17,25,0.12);
+    border-color: var(--gold);
+  }
+  .package-card.featured {
+    background: var(--burgundy-deep);
+    color: var(--white);
+  }
+  .package-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--gold);
+    color: var(--white);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    border-radius: 20px;
+  }
+  .package-name {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+  .package-card.featured .package-name { color: var(--gold); }
+  .package-price {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    color: var(--burgundy-deep);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .package-card.featured .package-price { color: var(--white); }
+  .package-price-note { font-size: 0.78rem; color: #999; margin-bottom: 28px; }
+  .package-card.featured .package-price-note { color: rgba(255,255,255,0.6); }
+  .package-features { list-style: none; margin-bottom: 36px; }
+  .package-features li {
+    font-size: 0.88rem;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--silver-pale);
+    display: flex; align-items: center; gap: 10px;
+    color: #555;
+    font-weight: 300;
+  }
+  .package-card.featured .package-features li { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.1); }
+  .package-features li i { color: var(--gold); font-size: 0.75rem; }
+  .pkg-btn {
+    width: 100%;
+    padding: 14px;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .pkg-btn-dark { background: var(--burgundy-deep); color: var(--white); border: none; }
+  .pkg-btn-dark:hover { background: var(--gold); }
+  .pkg-btn-light { background: transparent; color: var(--white); border: 1.5px solid rgba(255,255,255,0.5); }
+  .pkg-btn-light:hover { background: var(--gold); border-color: var(--gold); }
+
+  /* ─── GALLERY ─── */
+  #gallery { background: var(--white); }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 8px;
+    margin-top: 60px;
+  }
+  .gallery-item {
+    overflow: hidden;
+    position: relative;
+    border-radius: 2px;
+    background: var(--silver-pale);
+  }
+  .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+  .gallery-item:nth-child(5) { grid-column: span 2; }
+  .gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+    filter: grayscale(20%);
+  }
+  .gallery-item:hover img { transform: scale(1.06); filter: grayscale(0%); }
+  .gallery-overlay {
+    position: absolute; inset: 0;
+    background: rgba(61,17,25,0.5);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+  .gallery-overlay i { color: var(--white); font-size: 1.6rem; }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials { background: var(--burgundy-deep); }
+  #testimonials .section-title { color: var(--white); }
+  #testimonials .section-tag { color: var(--gold); }
+  #testimonials .section-tag::before { background: var(--gold); }
+  .testimonials-slider {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+  }
+  .testimonial-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 40px 32px;
+    border-radius: 4px;
+    transition: background 0.3s;
+  }
+  .testimonial-card:hover { background: rgba(255,255,255,0.1); }
+  .testimonial-stars { color: var(--gold); margin-bottom: 20px; font-size: 0.85rem; letter-spacing: 2px; }
+  .testimonial-text {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.8;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 14px; }
+  .testimonial-avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--white);
+  }
+  .testimonial-name { font-size: 0.9rem; font-weight: 500; color: var(--white); }
+  .testimonial-event { font-size: 0.75rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  /* ─── BOOKING & CALENDAR ─── */
+  #booking { background: var(--white); }
+  .booking-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
+    align-items: start;
+  }
+  .booking-form-wrap { }
+  .form-group { margin-bottom: 20px; }
+  .form-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--burgundy-deep);
+    margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid var(--silver-soft);
+    background: var(--white);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: #333;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--burgundy-deep); }
+  .form-group textarea { min-height: 110px; resize: vertical; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--burgundy-deep);
+    color: var(--white);
+    border: none;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.25s;
+    margin-top: 8px;
+  }
+  .form-submit:hover { background: var(--gold); }
+  .form-success {
+    display: none;
+    background: #f0faf0;
+    border: 1px solid #a8d5a2;
+    color: #2d6a4f;
+    padding: 16px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-top: 16px;
+    text-align: center;
+  }
+
+  /* Calendar */
+  .calendar-wrap { }
+  .calendar-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .calendar-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--burgundy-deep);
+    font-weight: 400;
+  }
+  .cal-nav {
+    background: none; border: 1.5px solid var(--silver-soft);
+    width: 36px; height: 36px;
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--burgundy-deep);
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+  .cal-nav:hover { background: var(--burgundy-deep); color: var(--white); border-color: var(--burgundy-deep); }
+  .calendar-grid {
+    border: 1.5px solid var(--silver-pale);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .cal-weekdays {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    background: var(--silver-pale);
+  }
+  .cal-weekday {
+    padding: 12px 0;
+    text-align: center;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--burgundy-deep);
+  }
+  .cal-days { display: grid; grid-template-columns: repeat(7, 1fr); }
+  .cal-day {
+    padding: 14px 8px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #444;
+    cursor: pointer;
+    transition: all 0.15s;
+    border-right: 1px solid var(--silver-pale);
+    border-bottom: 1px solid var(--silver-pale);
+    min-height: 56px;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    gap: 4px;
+  }
+  .cal-day:hover { background: var(--silver-pale); }
+  .cal-day.today { background: var(--burgundy-deep); color: var(--white); font-weight: 500; }
+  .cal-day.selected { background: var(--gold); color: var(--white); }
+  .cal-day.empty { background: #fafafa; cursor: default; }
+  .cal-day.booked { color: #ccc; cursor: not-allowed; }
+  .cal-event-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+  .cal-day.booked .cal-event-dot { background: #ccc; }
+  .cal-legend {
+    display: flex; gap: 20px; margin-top: 16px; flex-wrap: wrap;
+  }
+  .cal-legend-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.75rem; color: #777;
+  }
+  .cal-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .cal-dot.available { background: var(--white); border: 1.5px solid var(--silver-soft); }
+  .cal-dot.booked { background: #ccc; }
+  .cal-dot.event { background: var(--gold); }
+  .cal-dot.today { background: var(--burgundy-deep); }
+  .upcoming-events { margin-top: 28px; }
+  .upcoming-title { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 500; color: var(--burgundy-deep); margin-bottom: 14px; }
+  .upcoming-event {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--silver-pale);
+  }
+  .upcoming-date-box {
+    width: 44px; height: 44px;
+    background: var(--burgundy-deep);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    border-radius: 2px; flex-shrink: 0;
+  }
+  .upcoming-day { font-family: var(--font-display); font-size: 1.1rem; color: var(--white); line-height: 1; }
+  .upcoming-month { font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+  .upcoming-info .ev-name { font-size: 0.88rem; font-weight: 500; color: #333; }
+  .upcoming-info .ev-type { font-size: 0.75rem; color: #999; margin-top: 2px; }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--silver-pale); }
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    margin-top: 60px;
+  }
+  .contact-info-block { display: flex; flex-direction: column; gap: 32px; }
+  .contact-item { display: flex; gap: 18px; align-items: flex-start; }
+  .contact-icon {
+    width: 48px; height: 48px; flex-shrink: 0;
+    background: var(--burgundy-deep);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white); font-size: 1rem;
+  }
+  .contact-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: #999; margin-bottom: 4px; font-weight: 500; }
+  .contact-value { font-size: 0.95rem; color: #333; font-weight: 400; }
+  .contact-value a { color: var(--burgundy-deep); text-decoration: none; }
+  .social-buttons { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 10px; }
+  .social-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 22px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.25s;
+    border: none; cursor: pointer;
+  }
+  .social-btn.whatsapp { background: #25D366; color: var(--white); }
+  .social-btn.whatsapp:hover { background: #1ebe5d; }
+  .social-btn.instagram { background: linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: var(--white); }
+  .social-btn.instagram:hover { opacity: 0.9; }
+  .social-btn.call { background: var(--burgundy-deep); color: var(--white); }
+  .social-btn.call:hover { background: var(--gold); }
+  .social-btn.tiktok { background: #000; color: var(--white); }
+  .social-btn.tiktok:hover { background: #333; }
+
+  /* ─── FLOATING WHATSAPP ─── */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 30px; right: 28px;
+    z-index: 9999;
+    display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+  }
+  .wa-bubble {
+    display: flex; align-items: center; gap: 10px;
+    background: var(--white);
+    border-radius: 24px;
+    padding: 10px 18px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    font-size: 0.82rem;
+    color: #333;
+    font-weight: 400;
+    animation: fadeSlide 0.5s ease both;
+    transform-origin: bottom right;
+  }
+  .wa-bubble strong { color: #25D366; }
+  @keyframes fadeSlide { from { opacity:0; transform: translateY(8px) scale(0.95); } to { opacity:1; transform: none; } }
+  .wa-main-btn {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 8px 28px rgba(37,211,102,0.4);
+    cursor: pointer; border: none;
+    text-decoration: none;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .wa-main-btn:hover { transform: scale(1.08); box-shadow: 0 12px 36px rgba(37,211,102,0.5); }
+  .wa-main-btn i { color: var(--white); font-size: 1.6rem; }
+  .wa-pulse {
+    position: absolute; top: -4px; right: -4px;
+    width: 18px; height: 18px;
+    background: #ff3b30;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.6rem;
+    color: var(--white); font-weight: 700;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.18)} }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--burgundy-deep);
+    color: rgba(255,255,255,0.7);
+    padding: 60px 5% 30px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 30px;
+  }
+  .footer-brand-name {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  .footer-brand-name span { color: var(--gold); }
+  .footer-about { font-size: 0.87rem; line-height: 1.75; font-weight: 300; }
+  .footer-col-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-links a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.87rem; font-weight: 300; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  .footer-copy { font-size: 0.78rem; }
+  .footer-socials { display: flex; gap: 12px; }
+  .footer-social-icon {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .footer-social-icon:hover { background: var(--gold); border-color: var(--gold); color: var(--white); }
+
+  /* ─── ANIMATIONS ─── */
+  .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .fade-up.visible { opacity: 1; transform: none; }
+  .delay-1 { transition-delay: 0.15s; }
+  .delay-2 { transition-delay: 0.3s; }
+  .delay-3 { transition-delay: 0.45s; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu {
+      display: block;
+      position: fixed; top: 72px; left: 0; right: 0;
+      background: var(--white);
+      padding: 20px 5%;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+      z-index: 999;
+      transform: translateY(-10px); opacity: 0;
+      pointer-events: none; transition: all 0.3s;
+    }
+    .mobile-menu.open { transform: none; opacity: 1; pointer-events: all; }
+    .mobile-menu ul { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+    .mobile-menu a { font-size: 1rem; color: var(--burgundy-deep); text-decoration: none; font-weight: 400; }
+    .hero-bg-decor { width: 100%; clip-path: none; opacity: 0.3; }
+    .hero { padding-top: 100px; }
+    .booking-layout, .contact-layout, .footer-top { grid-template-columns: 1fr; gap: 40px; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    .gallery-item:nth-child(1) { grid-column: span 2; }
+    .gallery-item:nth-child(5) { grid-column: span 2; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 580px) {
+    .hero-stats { gap: 24px; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    section { padding: 70px 5%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Luxcel<span>.</span>Events</a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#packages">Packages</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#booking" class="nav-cta">Book Now</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#services" onclick="toggleMenu()">Services</a></li>
+    <li><a href="#packages" onclick="toggleMenu()">Packages</a></li>
+    <li><a href="#gallery" onclick="toggleMenu()">Gallery</a></li>
+    <li><a href="#testimonials" onclick="toggleMenu()">Reviews</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+    <li><a href="#booking" onclick="toggleMenu()">Book Now</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg-decor"></div>
+  <div class="hero-content">
+    <div class="hero-tag fade-up visible">Ghana's Premier Event Experience</div>
+    <h1 class="fade-up visible delay-1">Where Every<br/><em>Moment</em><br/>Becomes a Memory</h1>
+    <p class="fade-up visible delay-2">We craft unforgettable events — from intimate weddings and lavish corporate galas to vibrant birthday celebrations. Luxury planning, flawless execution.</p>
+    <div class="hero-btns fade-up visible delay-3">
+      <a href="#booking" class="btn-primary"><i class="fa-regular fa-calendar-check"></i> Book Your Event</a>
+      <a href="#gallery" class="btn-outline"><i class="fa-regular fa-images"></i> Our Work</a>
+    </div>
+    <div class="hero-stats fade-up visible">
+      <div>
+        <div class="hero-stat-num">500+</div>
+        <div class="hero-stat-label">Events Planned</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">8+</div>
+        <div class="hero-stat-label">Years Experience</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">100%</div>
+        <div class="hero-stat-label">Client Satisfaction</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-tag fade-up">What We Do</div>
+  <h2 class="section-title fade-up delay-1">Crafting <em>Exceptional</em><br/>Experiences</h2>
+  <p class="section-sub fade-up delay-2">From concept to execution, we handle every detail so you can simply enjoy the moment.</p>
+  <div class="services-grid">
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-rings-wedding"></i></div>
+      <div class="service-name">Weddings</div>
+      <div class="service-desc">Intimate or grand, we create your perfect wedding day — from décor and florals to full coordination and on-the-day management.</div>
+    </div>
+    <div class="service-card fade-up delay-1">
+      <div class="service-icon"><i class="fa-solid fa-briefcase"></i></div>
+      <div class="service-name">Corporate Events</div>
+      <div class="service-desc">Conferences, product launches, gala dinners, and team experiences delivered with professionalism and flair.</div>
+    </div>
+    <div class="service-card fade-up delay-2">
+      <div class="service-icon"><i class="fa-solid fa-champagne-glasses"></i></div>
+      <div class="service-name">Celebrations</div>
+      <div class="service-desc">Birthdays, anniversaries, baby showers, and milestone events turned into nights you'll never forget.</div>
+    </div>
+    <div class="service-card fade-up delay-3">
+      <div class="service-icon"><i class="fa-solid fa-palette"></i></div>
+      <div class="service-name">Décor & Styling</div>
+      <div class="service-desc">Transforming venues with bespoke installations, florals, lighting design, and tailored aesthetics that wow every guest.</div>
+    </div>
+    <div class="service-card fade-up">
+      <div class="service-icon"><i class="fa-solid fa-camera"></i></div>
+      <div class="service-name">Photography & Film</div>
+      <div class="service-desc">Capturing your story through cinematic photography and videography packages that preserve every precious moment.</div>
+    </div>
+    <div class="service-card fade-up delay-1">
+      <div class="service-icon"><i class="fa-solid fa-utensils"></i></div>
+      <div class="service-name">Catering & Bar</div>
+      <div class="service-desc">Curated menus, cocktail bars, and catering coordination tailored to your theme, guests, and taste preferences.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages">
+  <div class="section-tag fade-up">Pricing</div>
+  <h2 class="section-title fade-up delay-1">Choose Your <em>Experience</em></h2>
+  <p class="section-sub fade-up delay-2">Transparent packages designed to suit every vision and budget. All packages are customisable.</p>
+  <div class="packages-grid">
+    <div class="package-card fade-up">
+      <div class="package-name">Essential</div>
+      <div class="package-price">GH₵2,500</div>
+      <div class="package-price-note">Starting from</div>
+      <ul class="package-features">
+        <li><i class="fa-solid fa-star"></i> Event Consultation (3hrs)</li>
+        <li><i class="fa-solid fa-star"></i> Basic Décor Setup</li>
+        <li><i class="fa-solid fa-star"></i> Day-of Coordination</li>
+        <li><i class="fa-solid fa-star"></i> Venue Sourcing Assist</li>
+        <li><i class="fa-solid fa-star"></i> Guest List Management</li>
+      </ul>
+      <button class="pkg-btn pkg-btn-dark" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Get Started</button>
+    </div>
+    <div class="package-card featured fade-up delay-1">
+      <div class="package-badge">Most Popular</div>
+      <div class="package-name">Signature</div>
+      <div class="package-price">GH₵6,500</div>
+      <div class="package-price-note">Starting from</div>
+      <ul class="package-features">
+        <li><i class="fa-solid fa-star"></i> Full Event Planning</li>
+        <li><i class="fa-solid fa-star"></i> Premium Décor & Florals</li>
+        <li><i class="fa-solid fa-star"></i> Photography (6hrs)</li>
+        <li><i class="fa-solid fa-star"></i> Catering Coordination</li>
+        <li><i class="fa-solid fa-star"></i> Entertainment Booking</li>
+        <li><i class="fa-solid fa-star"></i> Full Day Coordination</li>
+      </ul>
+      <button class="pkg-btn pkg-btn-light" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book Signature</button>
+    </div>
+    <div class="package-card fade-up delay-2">
+      <div class="package-name">Luxcel Elite</div>
+      <div class="package-price">GH₵15,000</div>
+      <div class="package-price-note">Starting from</div>
+      <ul class="package-features">
+        <li><i class="fa-solid fa-star"></i> Bespoke Event Design</li>
+        <li><i class="fa-solid fa-star"></i> Luxury Décor & Floral Art</li>
+        <li><i class="fa-solid fa-star"></i> Photo + Video Coverage</li>
+        <li><i class="fa-solid fa-star"></i> Full Catering + Bar</li>
+        <li><i class="fa-solid fa-star"></i> Entertainment + MC</li>
+        <li><i class="fa-solid fa-star"></i> Dedicated Event Manager</li>
+        <li><i class="fa-solid fa-star"></i> Post-Event Support</li>
+      </ul>
+      <button class="pkg-btn pkg-btn-dark" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Go Elite</button>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="section-tag fade-up">Portfolio</div>
+  <h2 class="section-title fade-up delay-1">Moments We've <em>Created</em></h2>
+  <p class="section-sub fade-up delay-2">A glimpse into the magic we produce for our clients across Ghana and beyond.</p>
+  <div class="gallery-grid fade-up">
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Wedding event" loading="lazy"/>
+      <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80" alt="Corporate gala" loading="lazy"/>
+      <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&w=600&q=80" alt="Birthday party" loading="lazy"/>
+      <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=600&q=80" alt="Décor styling" loading="lazy"/>
+      <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?auto=format&fit=crop&w=600&q=80" alt="Celebration" loading="lazy"/>
+      <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+    </div>
+    <div class="gallery-item">
+      <img src="https://images.unsplash.com/photo-1478146896981-b80fe463b330?auto=format&fit=crop&w=600&q=80" alt="Luxury event" loading="lazy"/>
+      <div class="gallery-overlay"><i class="fa-solid fa-expand"></i></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-tag fade-up">Testimonials</div>
+  <h2 class="section-title fade-up delay-1">What Our <em>Clients</em> Say</h2>
+  <div class="testimonials-slider">
+    <div class="testimonial-card fade-up">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Luxcel Events made our wedding absolutely perfect. Every detail was flawless — from the décor to the coordination. We didn't stress for even a second on our big day."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">AB</div>
+        <div>
+          <div class="testimonial-name">Abena & Kwame Boateng</div>
+          <div class="testimonial-event">Wedding — Accra, 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-up delay-1">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"Our company gala was the talk of the industry. Luxcel delivered a truly world-class experience. Professional, creative, and completely reliable."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">EM</div>
+        <div>
+          <div class="testimonial-name">Enyonam Mensah</div>
+          <div class="testimonial-event">Corporate Gala — Kumasi, 2024</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card fade-up delay-2">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">"My 30th birthday party was everything I dreamed of and more! The team listened to every idea and brought it to life beautifully. Absolutely recommend."</p>
+      <div class="testimonial-author">
+        <div class="testimonial-avatar">SP</div>
+        <div>
+          <div class="testimonial-name">Sandra Prempeh</div>
+          <div class="testimonial-event">Birthday Celebration — Accra, 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING & CALENDAR -->
+<section id="booking">
+  <div class="section-tag fade-up">Reservations</div>
+  <h2 class="section-title fade-up delay-1">Book Your <em>Event</em></h2>
+  <p class="section-sub fade-up delay-2">Fill in the form and our team will get back to you within 24 hours to confirm your date and begin planning.</p>
+  <div class="booking-layout">
+    <div class="booking-form-wrap fade-up">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" id="fname" placeholder="Your first name"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" id="lname" placeholder="Your last name"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="your@email.com"/>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" id="phone" placeholder="+233 ..."/>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Event Type</label>
+          <select id="eventType">
+            <option value="">Select type...</option>
+            <option>Wedding</option>
+            <option>Corporate Event</option>
+            <option>Birthday Celebration</option>
+            <option>Anniversary</option>
+            <option>Baby Shower</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Package</label>
+          <select id="package">
+            <option value="">Select package...</option>
+            <option>Essential</option>
+            <option>Signature</option>
+            <option>Luxcel Elite</option>
+            <option>Custom / Not Sure</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Preferred Date</label>
+          <input type="date" id="eventDate" min="2025-01-01"/>
+        </div>
+        <div class="form-group">
+          <label>Guest Count</label>
+          <input type="number" id="guests" placeholder="Approx. number" min="1"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Tell Us About Your Event</label>
+        <textarea id="message" placeholder="Share your vision, theme ideas, or any special requirements..."></textarea>
+      </div>
+      <button class="form-submit" onclick="submitBooking()">
+        <i class="fa-regular fa-paper-plane"></i> &nbsp;Send Enquiry
+      </button>
+      <div class="form-success" id="formSuccess">
+        <i class="fa-solid fa-circle-check" style="color:#2d6a4f;margin-right:8px;"></i>
+        Thank you! Your enquiry has been received. We'll be in touch within 24 hours.
+      </div>
+    </div>
+    <div class="calendar-wrap fade-up delay-1">
+      <div class="calendar-header">
+        <button class="cal-nav" onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <div class="calendar-title" id="calTitle">May 2025</div>
+        <button class="cal-nav" onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+      <div class="calendar-grid">
+        <div class="cal-weekdays">
+          <div class="cal-weekday">Sun</div><div class="cal-weekday">Mon</div>
+          <div class="cal-weekday">Tue</div><div class="cal-weekday">Wed</div>
+          <div class="cal-weekday">Thu</div><div class="cal-weekday">Fri</div>
+          <div class="cal-weekday">Sat</div>
+        </div>
+        <div class="cal-days" id="calDays"></div>
+      </div>
+      <div class="cal-legend">
+        <div class="cal-legend-item"><div class="cal-dot today"></div> Today</div>
+        <div class="cal-legend-item"><div class="cal-dot event"></div> Events Planned</div>
+        <div class="cal-legend-item"><div class="cal-dot booked"></div> Unavailable</div>
+      </div>
+      <div class="upcoming-events">
+        <div class="upcoming-title">Upcoming Events</div>
+        <div class="upcoming-event">
+          <div class="upcoming-date-box"><div class="upcoming-day">14</div><div class="upcoming-month">Jun</div></div>
+          <div class="upcoming-info"><div class="ev-name">Mensah — White Wedding</div><div class="ev-type">Wedding · Movenpick Hotel, Accra</div></div>
+        </div>
+        <div class="upcoming-event">
+          <div class="upcoming-date-box"><div class="upcoming-day">22</div><div class="upcoming-month">Jun</div></div>
+          <div class="upcoming-info"><div class="ev-name">GoldLink Corp Gala</div><div class="ev-type">Corporate · Kempinski Hotel</div></div>
+        </div>
+        <div class="upcoming-event">
+          <div class="upcoming-date-box"><div class="upcoming-day">05</div><div class="upcoming-month">Jul</div></div>
+          <div class="upcoming-info"><div class="ev-name">Prempeh Birthday Bash</div><div class="ev-type">Celebration · Private Venue</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag fade-up">Get In Touch</div>
+  <h2 class="section-title fade-up delay-1">Let's Talk About<br/><em>Your Vision</em></h2>
+  <div class="contact-layout">
+    <div class="contact-info-block">
+      <div class="contact-item fade-up">
+        <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+        <div>
+          <div class="contact-label">Phone & WhatsApp</div>
+          <div class="contact-value"><a href="tel:+233257189829">+233 25 718 9829</a></div>
+        </div>
+      </div>
+      <div class="contact-item fade-up delay-1">
+        <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Accra, Ghana</div>
+        </div>
+      </div>
+      <div class="contact-item fade-up delay-2">
+        <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
+        <div>
+          <div class="contact-label">Working Hours</div>
+          <div class="contact-value">Mon – Sat, 8am – 8pm</div>
+        </div>
+      </div>
+      <div class="fade-up delay-3">
+        <div class="contact-label" style="font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:#999;font-weight:500;margin-bottom:16px;">Connect With Us</div>
+        <div class="social-buttons">
+          <a href="https://wa.me/233257189829" target="_blank" class="social-btn whatsapp">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
+          </a>
+          <a href="tel:+233257189829" class="social-btn call">
+            <i class="fa-solid fa-phone"></i> Call Us
+          </a>
+          <a href="https://instagram.com/luxcel.events" target="_blank" class="social-btn instagram">
+            <i class="fa-brands fa-instagram"></i> Instagram
+          </a>
+          <a href="https://tiktok.com/@luxcelaffairs" target="_blank" class="social-btn tiktok">
+            <i class="fa-brands fa-tiktok"></i> TikTok
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up delay-1">
+      <div style="background:var(--white);padding:40px;border-radius:4px;border:1.5px solid var(--silver-soft);">
+        <div style="font-family:var(--font-display);font-size:1.4rem;color:var(--burgundy-deep);margin-bottom:8px;">Quick Message</div>
+        <div style="font-size:0.85rem;color:#777;margin-bottom:24px;font-weight:300;">Prefer to message directly? Use the form below.</div>
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Full name"/>
+        </div>
+        <div class="form-group">
+          <label>Your Message</label>
+          <textarea placeholder="How can we help you?" style="min-height:130px;"></textarea>
+        </div>
+        <button class="form-submit" style="margin-top:0;">Send Message</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">Luxcel<span>.</span>Events</div>
+      <p class="footer-about">We are Ghana's premier event planning company, dedicated to turning your most important moments into extraordinary experiences. Every event is a masterpiece.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#packages">Packages</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#booking">Book Now</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Follow Us</div>
+      <ul class="footer-links">
+        <li><a href="https://instagram.com/luxcel.events" target="_blank"><i class="fa-brands fa-instagram" style="margin-right:8px;"></i>@luxcel.events</a></li>
+        <li><a href="https://tiktok.com/@luxcelaffairs" target="_blank"><i class="fa-brands fa-tiktok" style="margin-right:8px;"></i>@luxcelaffairs</a></li>
+        <li><a href="https://wa.me/233257189829" target="_blank"><i class="fa-brands fa-whatsapp" style="margin-right:8px;"></i>WhatsApp Us</a></li>
+        <li><a href="tel:+233257189829"><i class="fa-solid fa-phone" style="margin-right:8px;"></i>+233 25 718 9829</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Luxcel Events. All rights reserved. | Accra, Ghana</div>
+    <div class="footer-socials">
+      <a href="https://wa.me/233257189829" target="_blank" class="footer-social-icon"><i class="fa-brands fa-whatsapp"></i></a>
+      <a href="https://instagram.com/luxcel.events" target="_blank" class="footer-social-icon"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://tiktok.com/@luxcelaffairs" target="_blank" class="footer-social-icon"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="tel:+233257189829" class="footer-social-icon"><i class="fa-solid fa-phone"></i></a>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING WHATSAPP -->
+<div class="whatsapp-float" id="waFloat">
+  <div class="wa-bubble" id="waBubble">
+    <i class="fa-brands fa-whatsapp" style="color:#25D366;font-size:1.1rem;"></i>
+    Chat with <strong>Luxcel Events</strong> on WhatsApp!
+  </div>
+  <a href="https://wa.me/233257189829?text=Hello%20Luxcel%20Events!%20I'm%20interested%20in%20booking%20an%20event." target="_blank" class="wa-main-btn">
+    <div class="wa-pulse">1</div>
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+</div>
+
+<script>
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 30);
+});
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// Fade-up observer
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// WhatsApp bubble auto-hide
+setTimeout(() => {
+  const bubble = document.getElementById('waBubble');
+  if(bubble) bubble.style.opacity = '0';
+  setTimeout(() => { if(bubble) bubble.style.display = 'none'; }, 500);
+}, 6000);
+
+// Calendar
+const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const bookedDays = { '2025-5': [7,8,14,22], '2025-6': [14,22,28] };
+const eventDays  = { '2025-5': [17,24,31], '2025-6': [14,22] };
+
+let now = new Date(); let curYear = now.getFullYear(); let curMonth = now.getMonth();
+function renderCal() {
+  document.getElementById('calTitle').textContent = months[curMonth] + ' ' + curYear;
+  const first = new Date(curYear, curMonth, 1).getDay();
+  const days = new Date(curYear, curMonth+1, 0).getDate();
+  const key = curYear+'-'+(curMonth+1);
+  const booked = bookedDays[key]||[];
+  const events = eventDays[key]||[];
+  let html = '';
+  for(let i=0;i<first;i++) html += '<div class="cal-day empty"></div>';
+  for(let d=1;d<=days;d++) {
+    const isToday = d===now.getDate()&&curMonth===now.getMonth()&&curYear===now.getFullYear();
+    const isBooked = booked.includes(d);
+    const isEvent  = events.includes(d);
+    let cls = 'cal-day';
+    if(isToday) cls += ' today';
+    else if(isBooked) cls += ' booked';
+    let dot = isEvent?'<div class="cal-event-dot"></div>':'';
+    html += `<div class="${cls}" onclick="selectDay(${d})">${d}${dot}</div>`;
+  }
+  document.getElementById('calDays').innerHTML = html;
+}
+function changeMonth(dir) { curMonth+=dir; if(curMonth>11){curMonth=0;curYear++;} if(curMonth<0){curMonth=11;curYear--;} renderCal(); }
+function selectDay(d) {
+  document.querySelectorAll('.cal-day.selected').forEach(el=>el.classList.remove('selected'));
+  const m=String(curMonth+1).padStart(2,'0'),dd=String(d).padStart(2,'0');
+  document.getElementById('eventDate').value=curYear+'-'+m+'-'+dd;
+  event.target.classList.add('selected');
+}
+renderCal();
+
+// Booking form
+function submitBooking() {
+  const f = document.getElementById('fname').value;
+  const e = document.getElementById('email').value;
+  if(!f||!e) { alert('Please fill in at least your name and email.'); return; }
+  document.getElementById('formSuccess').style.display = 'block';
+  document.querySelectorAll('#booking input, #booking select, #booking textarea').forEach(el=>el.value='');
+}
+</script>
+</body>
+</html>
